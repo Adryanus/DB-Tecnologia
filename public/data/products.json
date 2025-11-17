@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "name": "Laptop Gamer",
+    "price": 1850000,
+    "category": "Tecnología",
+    "description": "Laptop de alto rendimiento con tarjeta gráfica dedicada y 16GB de RAM.",
+    "imageUrl": "/images/LaptopGamer.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Auriculares Inalámbricos",
+    "price": 95000,
+    "category": "Tecnología",
+    "description": "Auriculares con cancelación activa de ruido y estuche de carga.",
+    "imageUrl": "/images/AuricularesInalambricos.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Smartphone 5G",
+    "price": 720000,
+    "category": "Tecnología",
+    "description": "Teléfono inteligente con pantalla AMOLED de 6.5 pulgadas y 128GB de memoria.",
+    "imageUrl": "/images/SmartPhone5G.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Silla Ergonómica",
+    "price": 210000,
+    "category": "Hogar",
+    "description": "Silla de oficina ergonómica con soporte lumbar ajustable.",
+    "imageUrl": "/images/SillaErgonomica.jpg"
+  },
+  {
+    "id": "5",
+    "name": "Teclado Mecánico RGB",
+    "price": 68000,
+    "category": "Tecnología",
+    "description": "Teclado mecánico retroiluminado con switches azules y estructura metálica.",
+    "imageUrl": "/images/TecladoMecanicoRGB.jpg"
+  },
+  {
+    "id": "6",
+    "name": "Mochila Antirrobo",
+    "price": 43000,
+    "category": "Hogar",
+    "description": "Mochila resistente al agua con puerto USB y bolsillos ocultos.",
+    "imageUrl": "/images/MochilaAntirrobo.jpg"
+  },
+  {
+    "id": "7",
+    "name": "Cafetera Espresso",
+    "price": 155000,
+    "category": "Hogar",
+    "description": "Cafetera automática con espumador de leche y programación digital.",
+    "imageUrl": "/images/CafeteraEspresso.jpg"
+  },
+  {
+    "id": "8",
+    "name": "Smartwatch Deportivo",
+    "price": 98000,
+    "category": "Tecnología",
+    "description": "Reloj inteligente con GPS, sensor de ritmo cardíaco y monitor de sueño.",
+    "imageUrl": "/images/smartwatch.jpg"
+  },
+  {
+    "id": "9",
+    "name": "Parlante Bluetooth",
+    "price": 56000,
+    "category": "Tecnología",
+    "description": "Parlante portátil resistente al agua con hasta 12 horas de batería.",
+    "imageUrl": "/images/ParlanteBluetooth.jpg"
+  },
+  {
+    "id": "10",
+    "name": "Monitor 27'' 4K",
+    "price": 350000,
+    "category": "Hogar",
+    "description": "Monitor UHD 4K con panel IPS y tasa de refresco de 144Hz.",
+    "imageUrl": "/images/Monitor27.jpg"
+  }
+]

@@ -1,0 +1,53 @@
+nav ul {
+  list-style: none; /* Quita los puntos de la lista */
+  display: flex; /* Coloca los <li> en fila */
+  flex-direction: row; /* Garantiza disposición horizontal */
+  gap: 2rem; /* Espaciado entre los enlaces */
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+nav a:hover {
+  color: #1e90ff; /* Azul brillante DB Electrónica */
+  text-shadow: 0 0 8px #1e90ff;
+}
+.in-cart {
+  background-color: #ff4500; /* Rojo brillante para destacar */
+  color: white;
+  border-radius: 50%;
+  padding: 0.2rem 0.6rem;
+  display: inline-block;
+  min-width: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 0.25rem;
+  box-shadow: 0 0 5px rgba(255, 69, 0, 0.7);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+  }
+}

@@ -1,0 +1,35 @@
+.footer {
+  background-color: #1a1a1a; /* fondo oscuro para destacar */
+  color: #f1f1f1; /* texto claro */
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin-top: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  border-top: 3px solid #00bcd4; /* línea decorativa */
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-text {
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.footer-text:hover {
+  color: #00bcd4; /* efecto sutil al pasar el mouse */
+  cursor: default;
+}
+
+/* Adaptación responsive */
+@media (max-width: 600px) {
+  .footer {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}

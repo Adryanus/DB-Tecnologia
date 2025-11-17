@@ -1,0 +1,140 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  background: radial-gradient(circle at 30% 20%, #090909 0%, #050505 100%);
+  color: #e5e5e5;
+  font-family: "Orbitron", "Poppins", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.login-form {
+  background: rgba(18, 18, 25, 0.95);
+  border: 1px solid rgba(80, 80, 200, 0.3);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 25px rgba(80, 80, 200, 0.2),
+              inset 0 0 15px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Efecto de brillo animado */
+.login-form::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 180deg,
+    transparent,
+    rgba(110, 80, 255, 0.3),
+    transparent,
+    rgba(0, 180, 255, 0.3)
+  );
+  animation: rotateGlow 6s linear infinite;
+  z-index: 0;
+  filter: blur(25px);
+}
+
+@keyframes rotateGlow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.login-form h2 {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 2rem;
+  color: #d0d0ff;
+  font-size: 1.8rem;
+  text-shadow: 0 0 8px rgba(80, 180, 255, 0.7);
+}
+
+.login-form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.5rem;
+  color: #aaa;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1.3rem;
+  border: 1px solid rgba(100, 100, 255, 0.4);
+  border-radius: 10px;
+  background: rgba(25, 25, 35, 0.9);
+  color: #dcdcff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.login-form input:focus {
+  border-color: #00b7ff;
+  box-shadow: 0 0 10px rgba(0, 183, 255, 0.5);
+  outline: none;
+}
+
+.login-form button {
+  background: linear-gradient(90deg, #0077ff, #9f00ff);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.9rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.login-form button:hover {
+  background: linear-gradient(90deg, #00c3ff, #b000ff);
+  box-shadow: 0 0 15px rgba(0, 180, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.login-form button:active {
+  transform: translateY(0);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-form {
+    padding: 2rem 1.5rem;
+  }
+
+  .login-form h2 {
+    font-size: 1.5rem;
+  }
+}
+

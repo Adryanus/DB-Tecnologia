@@ -1,0 +1,55 @@
+.admin-product-item {
+  background-color: #1e1f24;
+  color: #61dafb; /* Color principal de todos los textos */
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-product-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.admin-product-name {
+  color: #61dafb !important;
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.admin-product-description {
+  color: #61dafb !important;
+  font-size: 0.9rem; /* un poco más chico */
+  margin: 0;
+}
+
+.admin-product-price {
+  color: #61dafb !important;
+  font-weight: bold;
+  margin: 0;
+}
+
+.delete-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #e63946;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #d62828;
+}
+
+
+
