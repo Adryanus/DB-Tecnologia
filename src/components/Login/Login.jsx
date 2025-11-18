@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { UseAuthContext } from "../../context/AuthContext/UseAuthContext";
+import { useAuthContext } from "../../context/AuthContext/UseAuthContext";
 import { Navigate, useNavigate } from "react-router-dom";
 
 import "./Login.css";
 export const Login = () => {
   const [userForm, setUserForm] = useState({ name: "", password: "" });
-  const { user, login } = UseAuthContext();
+  const { user, login } = useAuthContext();
   const navigate = useNavigate();
   if (user) {
     return <Navigate to="/admin/alta-productos" />;

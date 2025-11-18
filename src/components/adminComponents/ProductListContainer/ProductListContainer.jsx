@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { getProducts, deleteProduct } from "../../../services/product";
 import { ItemListAdmin } from "../ItemListAdmin/ItemListAdmin";
-import { UseAuthContext } from "../../../context/AuthContext/UseAuthContext";
+import { useAuthContext } from "../../../context/AuthContext/UseAuthContext";
 
 export const ProductListContainer = () => {
-  const { user } = UseAuthContext();
+  const { user } = useAuthContext();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
