@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { UseAuthContext } from "../../../context/AuthContext/UseAuthContext";
-import "./AdminNavbar.css";
+import "./AdminNavBar.css";
 
 export const AdminNavbar = () => {
   const { logout } = UseAuthContext();
