@@ -14,17 +14,14 @@ import { ProductFormContainer } from "./components/adminComponents/ProductFormCo
 import { ProductListContainer } from "./components/adminComponents/ProductListContainer/ProductListContainer";
 import { Login } from "./components/Login/Login";
 
-// ⭐ Nuevo import Dashboard
-import { Dashboard } from "./components/adminComponents/Dashboard/Dashboard";
-
 import "./App.css";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <CartProvider>
         <Routes>
-          {/* LAYOUT PUBLICO */}
+          {/* LAYOUT PÚBLICO */}
           <Route element={<MainLayout />}>
             <Route
               path="/"
@@ -43,18 +40,7 @@ function App() {
 
           {/* LAYOUT ADMIN */}
           <Route path="/admin" element={<AdminLayout />}>
-            {/* Página inicial del admin = login */}
             <Route index element={<Login />} />
-
-            {/* ⭐ Nueva ruta Dashboard */}
-            <Route
-              path="dashboard"
-              element={
-                <RutaProtegida>
-                  <Dashboard />
-                </RutaProtegida>
-              }
-            />
 
             <Route
               path="alta-productos"
