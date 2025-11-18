@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     sessionStorage.removeItem("session");
-    alert("Sesi贸n cerrada");
+    alert("Sesión cerrada");
   };
 
   return (
