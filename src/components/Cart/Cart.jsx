@@ -1,7 +1,7 @@
 import "./Cart.css";
 import { CartContext } from "../../context/CartContext/CartContext";
 import { useContext, useState } from "react";
-import { CheckoutForm } from "../CheckoutForm/ChekoutForm";
+import { CheckoutForm } from "../CheckOutForm/ChekOutForm";
 
 export const Cart = () => {
     const { cart, decreaseItem, addItem, deleteItem, clearCart, total, checkout } = useContext(CartContext);
