@@ -16,6 +16,7 @@ import { Login } from "./components/Login/Login";
 import { AuthProvider } from "./context/AuthContext/AuthProvider";
 // ⭐ Nuevo import Dashboard
 import { Dashboard } from "./components/adminComponents/Dashboard/Dashboard";
+import { OrdersList } from "./components/adminComponents/OrderList/OrderList";
 
 import "./App.css";
 
@@ -48,6 +49,15 @@ function App() {
             <Route path="/admin" element={<AdminLayout />}>
               {/* Página inicial del admin = login */}
               <Route index element={<Login />} />
+              
+              <Route
+                path="ordenes"
+                element={
+                  <RutaProtegida>
+                    <OrdersList />
+                  </RutaProtegida>
+                }
+              />
 
               {/* ⭐ Nueva ruta Dashboard */}
               <Route
