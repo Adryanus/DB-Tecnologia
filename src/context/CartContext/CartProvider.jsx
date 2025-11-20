@@ -85,13 +85,19 @@ export const CartProvider = ({ children }) => {
         date: new Date().toISOString(),
       };
 
-      const newOrder = await createOrder(order);
+    const newOrder = await createOrder(order);
 
-      alert(
-        `Gracias por su compra ${buyerData.name}!\n\nNúmero de orden: #${newOrder.id}`
-      );
+// Guardar orden completa localmente para mostrar en /gracias
+localStorage.setItem("order", JSON.stringify({
+  id: newOrder.id,
+  ...order
+}));
 
-      clearCart();
+alert(
+  `Gracias por su compra ${buyerData.name}!\n\nNúmero de orden: #${newOrder.id}`
+);
+
+clearCart();
     } catch (error) {
       console.error("Error al crear la orden:", error);
       alert("Error generando la orden");

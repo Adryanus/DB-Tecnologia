@@ -1,62 +1,114 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { CartContext } from "../../context/CartContext/CartContext";
 import "./CheckoutCard.css";
 
-export default function CheckoutForm() {
-  const navigate = useNavigate();
-  const { clearCart } = useContext(CartContext);
+export default function CheckoutForm({ total, onConfirm, onCancel }) {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // Estado del formulario de tarjeta
-  const [form, setForm] = useState({
+  const [buyer, setBuyer] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  const [card, setCard] = useState({
     cardNumber: "",
     cardName: "",
     expiry: "",
     cvv: "",
   });
 
-  const [isFlipped, setIsFlipped] = useState(false);
+  const handleBuyerChange = (e) => {
+    const { name, value } = e.target;
+    setBuyer({ ...buyer, [name]: value });
+  };
 
-  const handleChange = (e) => {
+  const handleCardChange = (e) => {
     const { name, value } = e.target;
 
-    // Máscara número tarjeta
     if (name === "cardNumber") {
-      let val = value.replace(/\D/g, "");
-      val = val.replace(/(.{4})/g, "$1 ").trim();
-      setForm({ ...form, cardNumber: val });
+      let v = value.replace(/\D/g, "");
+      v = v.replace(/(.{4})/g, "$1 ").trim();
+      setCard({ ...card, cardNumber: v });
       return;
     }
 
-    // Máscara MM/YY
     if (name === "expiry") {
-      let val = value.replace(/\D/g, "");
-      if (val.length >= 3) val = val.slice(0, 2) + "/" + val.slice(2, 4);
-      val = val.slice(0, 5);
-      setForm({ ...form, expiry: val });
+      let v = value.replace(/\D/g, "");
+      if (v.length >= 3) v = v.slice(0, 2) + "/" + v.slice(2);
+      v = v.slice(0, 5);
+      setCard({ ...card, expiry: v });
       return;
     }
 
-    // CVV
     if (name === "cvv") {
-      const val = value.replace(/\D/g, "");
-      setForm({ ...form, cvv: val });
+      let v = value.replace(/\D/g, "");
+      v = v.slice(0, 4);
+      setCard({ ...card, cvv: v });
       return;
     }
 
-    setForm({ ...form, [name]: value });
+    setCard({ ...card, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  // VALIDACIONES
+  const validate = () => {
+    if (!buyer.name || !buyer.email || !buyer.phone)
+      return "Complete todos los datos del comprador";
+
+    if (!/\S+@\S+\.\S+/.test(buyer.email))
+      return "Email inválido";
+
+    if (!/^\d{6,15}$/.test(buyer.phone))
+      return "Ingrese un teléfono válido";
+
+    if (!card.cardNumber || card.cardNumber.replace(/\s/g, "").length !== 16)
+      return "Número de tarjeta inválido";
+
+    if (!card.cardName)
+      return "Ingrese nombre de tarjeta";
+
+    // Expiry MM/YY
+    const regexExpiry = /^\d{2}\/\d{2}$/;
+    if (!regexExpiry.test(card.expiry))
+      return "Fecha de expiración inválida";
+
+    const [MM, YY] = card.expiry.split("/").map(n => parseInt(n));
+
+    if (MM < 1 || MM > 12)
+      return "Mes inválido";
+
+    const now = new Date();
+    const currentYY = now.getFullYear() % 100;
+    const currentMM = now.getMonth() + 1;
+
+    if (YY < currentYY || (YY === currentYY && MM < currentMM))
+      return "Tarjeta vencida";
+
+    if (!/^\d{3,4}$/.test(card.cvv))
+      return "CVV inválido";
+
+    return null;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Pago enviado (demo)");
-    // Aquí después llamarás a checkout() si querés
-  };
 
-  const handleCancel = () => {
-    clearCart();   // Vacía contexto + localStorage
-    navigate("/"); // Página de inicio
+    const error = validate();
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    setLoading(true);
+
+    await onConfirm({
+      buyer,
+      card,
+      total
+    });
+
+    setLoading(false);
   };
 
   return (
@@ -64,67 +116,104 @@ export default function CheckoutForm() {
       {/* Tarjeta 3D */}
       <div className="card-preview-wrapper">
         <div className={`card-3d ${isFlipped ? "flipped" : ""}`}>
-          {/* Frente */}
           <div className="card-front">
-            <div className="number">{form.cardNumber || "•••• •••• •••• ••••"}</div>
-            <div className="name">{form.cardName || "NOMBRE DEL TITULAR"}</div>
-            <div className="exp">{form.expiry || "MM/YY"}</div>
+            <div className="number">
+              {card.cardNumber || "•••• •••• •••• ••••"}
+            </div>
+            <div className="name">
+              {card.cardName || "NOMBRE DEL TITULAR"}
+            </div>
+            <div className="exp">
+              {card.expiry || "MM/YY"}
+            </div>
           </div>
 
-          {/* Dorso */}
           <div className="card-back">
             <div className="band"></div>
-            <div className="cvv-box">{form.cvv || "•••"}</div>
+            <div className="cvv-box">
+              {card.cvv || "•••"}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Formulario */}
       <form className="checkout-form" onSubmit={handleSubmit}>
-        <label>Número de tarjeta</label>
+        <h2>Datos del comprador</h2>
+
+        <label>Nombre completo</label>
         <input
           type="text"
+          name="name"
+          value={buyer.name}
+          onChange={handleBuyerChange}
+        />
+
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          value={buyer.email}
+          onChange={handleBuyerChange}
+        />
+
+        <label>Teléfono</label>
+        <input
+          type="text"
+          name="phone"
+          value={buyer.phone}
+          onChange={handleBuyerChange}
+        />
+
+        <h2>Datos de tarjeta</h2>
+
+        <label>Número de tarjeta</label>
+        <input
           name="cardNumber"
-          value={form.cardNumber}
-          onChange={handleChange}
+          value={card.cardNumber}
+          onChange={handleCardChange}
           maxLength={19}
-          placeholder="XXXX XXXX XXXX XXXX"
         />
 
         <label>Nombre en la tarjeta</label>
         <input
-          type="text"
           name="cardName"
-          value={form.cardName}
-          onChange={handleChange}
-          placeholder="Juan Pérez"
+          value={card.cardName}
+          onChange={handleCardChange}
         />
 
-        <label>Vencimiento</label>
+        <label>Expira</label>
         <input
-          type="text"
           name="expiry"
-          value={form.expiry}
-          onChange={handleChange}
-          placeholder="MM/YY"
+          value={card.expiry}
+          onChange={handleCardChange}
           maxLength={5}
         />
 
         <label>CVV</label>
         <input
-          type="text"
           name="cvv"
-          value={form.cvv}
+          value={card.cvv}
+          onChange={handleCardChange}
           maxLength={4}
           onFocus={() => setIsFlipped(true)}
           onBlur={() => setIsFlipped(false)}
-          onChange={handleChange}
         />
 
-        {/* Botones */}
         <div className="checkout-buttons">
-          <button type="submit" className="btn-confirmar">Confirmar pago</button>
-          <button type="button" className="btn-cancelar" onClick={handleCancel}>
+          <button
+            type="submit"
+            className="btn-confirmar"
+            disabled={loading}
+          >
+            {loading ? "Procesando..." : "Confirmar pago"}
+          </button>
+
+          <button
+            type="button"
+            className="btn-cancelar"
+            onClick={onCancel}
+            disabled={loading}
+          >
             Cancelar
           </button>
         </div>
@@ -132,5 +221,4 @@ export default function CheckoutForm() {
     </div>
   );
 }
-
 

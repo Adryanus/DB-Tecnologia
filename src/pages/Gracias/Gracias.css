@@ -1,0 +1,78 @@
+/* ===== Página Gracias ===== */
+/* ===== Página Gracias ===== */
+.gracias-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #111, #1c1c1c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+/* ===== Tarjeta principal (compatible con todos los navegadores) ===== */
+.gracias-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  border-radius: 20px;
+  padding: 40px 50px;
+  text-align: center;
+  width: 100%;
+  max-width: 550px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+}
+
+/* ===== Icono de éxito ===== */
+.success-icon {
+  font-size: 70px;
+  margin-bottom: 20px;
+  color: #4ade80;
+}
+
+/* ===== Títulos ===== */
+.gracias-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.gracias-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-bottom: 30px;
+}
+
+/* ===== Botón ===== */
+.gracias-btn {
+  margin-top: 25px;
+  display: inline-block;
+  padding: 12px 22px;
+  background: #4ade80;
+  color: #000;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: 0.2s ease;
+  border: none;
+}
+
+.gracias-btn:hover {
+  background: #22c55e;
+  cursor: pointer;
+}
+
+/* ===== Animación ===== */
+.fade-in-up {
+  animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -17,6 +17,7 @@ import { AuthProvider } from "./context/AuthContext/AuthProvider";
 // ⭐ Nuevo import Dashboard
 import { Dashboard } from "./components/adminComponents/Dashboard/Dashboard";
 import { OrdersList } from "./components/adminComponents/OrderList/OrderList";
+import Gracias from "./pages/Gracias/Gracias";
 
 import "./App.css";
 
@@ -43,6 +44,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/carrito" element={<Cart />} />
+              <Route path="/gracias" element={<Gracias />} />
             </Route>
 
             {/* LAYOUT ADMIN */}
