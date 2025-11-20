@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { CartContext } from "./CartContext";
 
 
-export const useCartContext = () => {return useContext(CartContext)
+export const useCartContext = () => {
+    return useContext(CartContext)
   
 }
 //Este es un custom hook que nos permite usar el contexto de carrito

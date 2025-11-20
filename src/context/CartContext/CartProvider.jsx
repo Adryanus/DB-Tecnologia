@@ -1,24 +1,32 @@
 import { CartContext } from "./CartContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createOrder } from "../../services/orders";
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  const exists = (id) => {
-    const exist = cart.some((product) => product.id === id);
-    return exist;
-  };
+  // Cargar carrito desde localStorage al iniciar
+  useEffect(() => {
+    const stored = localStorage.getItem("carrito");
+    if (stored) {
+      setCart(JSON.parse(stored));
+    }
+  }, []);
+
+  // Guardar cambios en localStorage
+  useEffect(() => {
+    localStorage.setItem("carrito", JSON.stringify(cart));
+  }, [cart]);
+
+  const exists = (id) => cart.some((product) => product.id === id);
 
   const addItem = (item) => {
     if (exists(item.id)) {
-      const updatedCart = cart.map((product) => {
-        if (product.id === item.id) {
-          return { ...product, quantity: product.quantity + item.quantity };
-        } else {
-          return product;
-        }
-      });
+      const updatedCart = cart.map((product) =>
+        product.id === item.id
+          ? { ...product, quantity: product.quantity + item.quantity }
+          : product
+      );
       setCart(updatedCart);
       alert(`Agregado a carrito`);
     } else {
@@ -29,17 +37,15 @@ export const CartProvider = ({ children }) => {
 
   const decreaseItem = (id) => {
     const updatedCart = cart
-      .map((product) => {
-        if (product.id === id) {
-          if (product.quantity > 1) {
-            return { ...product, quantity: product.quantity - 1 }; // restar 1
-          } else {
-            return null; // lo eliminamos si queda 1
-          }
-        }
-        return product;
-      })
-      .filter(Boolean); // eliminar los null
+      .map((product) =>
+        product.id === id
+          ? product.quantity > 1
+            ? { ...product, quantity: product.quantity - 1 }
+            : null
+          : product
+      )
+      .filter(Boolean);
+
     setCart(updatedCart);
   };
 
@@ -51,20 +57,16 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCart([]);
+    localStorage.removeItem("carrito"); // ← ESTA ES LA CLAVE
   };
 
-  const getTotalItems = () => {
-    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-    return totalItems;
-  };
+  const getTotalItems = () =>
+    cart.reduce((acc, item) => acc + item.quantity, 0);
 
-  const total = () => {
-    const total = cart.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    );
-    return Math.round(total * 100) / 100;
-  };
+  const total = () =>
+    Math.round(
+      cart.reduce((acc, item) => acc + item.price * item.quantity, 0) * 100
+    ) / 100;
 
   const checkout = async (buyerData) => {
     const ok = window.confirm("¿Desea finalizar la compra?");
@@ -83,8 +85,6 @@ export const CartProvider = ({ children }) => {
         date: new Date().toISOString(),
       };
 
-      console.log("ORDEN A ENVIAR →", order);
-
       const newOrder = await createOrder(order);
 
       alert(
@@ -100,6 +100,7 @@ export const CartProvider = ({ children }) => {
 
   const values = {
     cart,
+    setCart,
     addItem,
     decreaseItem,
     deleteItem,
@@ -108,5 +109,9 @@ export const CartProvider = ({ children }) => {
     total,
     checkout,
   };
-  return <CartContext.Provider value={values}>{children}</CartContext.Provider>;
+
+  return (
+    <CartContext.Provider value={values}>{children}</CartContext.Provider>
+  );
 };
+

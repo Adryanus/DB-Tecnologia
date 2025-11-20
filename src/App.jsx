@@ -9,7 +9,7 @@ import { ItemListContainer } from "./components/ItemListContainer/ItemListContai
 import { ItemDetailContainer } from "./components/ItemDetailContainer/ItemDetailContainer";
 import SobreNosotros from "./components/SobreNosotros/SobreNosotros";
 import Contact from "./components/Contact/Contact";
-import { Cart } from "./components/Cart/Cart";
+import Cart from "./components/Cart/Cart";
 import { ProductFormContainer } from "./components/adminComponents/ProductFormContainer/ProductFormContainer";
 import { ProductListContainer } from "./components/adminComponents/ProductListContainer/ProductListContainer";
 import { Login } from "./components/Login/Login";
